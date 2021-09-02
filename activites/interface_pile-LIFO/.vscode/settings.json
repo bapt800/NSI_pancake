@@ -1,0 +1,9 @@
+{
+    "python.pythonPath": "E:\\softwares\\Python\\python-3.10.0b4.amd64\\python.exe",
+    "python.testing.pytestArgs": [
+        "."
+    ],
+    "python.testing.unittestEnabled": false,
+    "python.testing.nosetestsEnabled": false,
+    "python.testing.pytestEnabled": true
+}
