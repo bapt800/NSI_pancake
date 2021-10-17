@@ -12,15 +12,15 @@ class SGBDD_GUI(tk.Tk):
         self.title_font = tkfont.Font(
             family='Helvetica', size=18, weight="bold", slant="italic")
 
-        #menubar = MenuBar(self)
-        #tk.Tk.config(self, menu=menubar)
+        # menubar = MenuBar(self)
+        # tk.Tk.config(self, menu=menubar)
 
         self.sideMenu: SideMenu = SideMenu(self, self)
         self.sideMenu.grid(column=0, row=0)
         self.sideMenu.anchor("n")
-        self.sideMenu.addTo_containerButton(tk.Button(self.sideMenu, text="Go to Page One", command=lambda: self.sideMenu.controller.show_frame("PageOne")))
-        self.sideMenu.addTo_containerButton(tk.Button(self.sideMenu, text="add view", command=lambda: self.sideMenu.controller.addView()))
-        #command=partial(self.addView, "test", self.show_frame("start"))
+        self.sideMenu.addTo_containerButton(tk.Button(
+            self.sideMenu, text="add view", command=lambda: self.sideMenu.controller.addView()))
+        # command=partial(self.addView, "test", self.show_frame("start"))
 
         # the container is where we'll stack a bunch of frames
         # on top of each other, then the one we want visible
@@ -30,40 +30,46 @@ class SGBDD_GUI(tk.Tk):
         self.container.grid_rowconfigure(0, weight=1)
         self.container.grid_columnconfigure(0, weight=1)
 
-        
-        self.view_container:Dict = {"main": View(
+        self.view_container: Dict = {"main": View(
             controller=self, frame_side=self.sideMenu, frame_center=self.container, view_ID="main")}
-        self.promoted_view = View(controller=self, frame_side=self.sideMenu, frame_center=self.container, view_ID="main")
-
+        self.promoted_view = View(
+            controller=self, frame_side=self.sideMenu, frame_center=self.container, view_ID="main")
 
         self.promote_view("main")
 
-    def show_frame(self, frame_ID):
-        self.promoted_view.grid()
+    def show_frame(self):
+        self.promoted_view.grid(column=0, row=0)
+
+        # row = 0
+        # for k, v in self.promoted_view.frame.children.items():
+        #    print("show_frame", k, v)
+        #    v.grid(column=0, row=row)
+        #    row += 1
+        # print("show_frame", "end")
 
     def destroy_view(self, view_ID):
         self.view_container[view_ID] = None
 
     def hide_frame_all(self):
-        self.promoted_view.destroy()
+        self.container.forget()
 
     def promote_view(self, view_ID):
-        self.hide_frame_all()
+        #self.hide_frame_all()
         self.promoted_view = self.view_container[view_ID]
-        
-        
+        self.show_frame()
 
     def addView(self, view_ID=""):
         if view_ID == "":
-            #name = input("type a name")
+            # name = input("type a name")
             view_ID = "prof TEST"
 
         view: View = View(controller=self, frame_side=self.sideMenu,
                           frame_center=self.container, view_ID=view_ID)
-        self.view_container[view.get_ID()] = view.tableView
+        self.view_container[view.ID] = view
 
-        self.sideMenu.addTo_containerButton(tk.Button(self.sideMenu, text=view.get_ID(
-        ), command=lambda: self.sideMenu.controller.promote_view(view.get_ID())))
+        self.sideMenu.addTo_containerButton(tk.Button(self.sideMenu, text=view.ID, command=lambda: self.sideMenu.controller.promote_view(view.ID)))
+
+        self.promote_view(view_ID)
 
     def exit(self):
         print("ciao")
@@ -101,11 +107,11 @@ class SideMenu(tk.Frame):
         self.refreshAll()
 
     def refreshAll(self):
-        #buff = self.frameButton
-        #for ell in self.frameButton.children.values():
+        # buff = self.frameButton
+        # for ell in self.frameButton.children.values():
         #    ell.destroy()
         self.frameButton.forget()
-        
+
         row = 0
         for ell in self.containerButton:
             print("refreshAll", ell)
@@ -116,7 +122,7 @@ class SideMenu(tk.Frame):
     def get_containerButton(self) -> List[tk.Button]:
         return self.containerButton
 
-    def addTo_containerButton(self, Button:tk.Button) -> None:
+    def addTo_containerButton(self, Button: tk.Button) -> None:
         if len(self.containerButton) == 0:
             self.containerButton.append(Button)
         else:
@@ -136,12 +142,12 @@ class StartPage(tk.Frame):
         tk.Frame.__init__(self, frame_parent)
         self.controller = controller
         self.label = tk.Label(self, text="This is the start page",
-                              font=controller.title_font)
+                              font = controller.title_font)
 
-        self.button1 = tk.Button(self, text="Go to Page One",
-                                 command=lambda: controller.show_frame("PageOne"))
+        self.button1=tk.Button(self, text = "Go to Page One",
+                                 command = lambda: controller.show_frame("PageOne"))
         self.button2 = tk.Button(self, text="Go to TableView",
-                                 command=lambda: controller.show_frame("TableView"))
+                                 command = lambda: controller.show_frame("TableView"))
 
         self.show()
 
@@ -164,22 +170,37 @@ class PageOne(tk.Frame):
         button.pack()
 
 
-class View:
-    def __init__(self, controller, frame_side, frame_center, view_ID) -> None:
-        self.name = view_ID
-        self.frame = Frame(frame_center)
+class View(tk.Frame):
+    def __init__(self, controller, frame_side, frame_center, view_ID):
+        tk.Frame.__init__(self, frame_center)
+        self.ID = view_ID
+        self.controller = controller
+        self.frame_center = frame_center
         self.sideButton = tk.Button(master=frame_side, text="eleves")
-        self.tableView = TableView(self.frame, controller)
 
-    def get_ID(self):
-        return self.name
-    
-    def grid(self, column = 0, row = 0):
-        self.frame.grid(column=column, row=row)
-    
-    def destroy(self):
-        self.frame.destroy()
-    
+
+# class View:
+#    def __init__(self, controller, frame_side, frame_center, view_ID) -> None:
+#        self.name = view_ID
+#        self.controller = controller
+#        self.frame_center = frame_center
+#        self.frame = Frame(frame_center)
+#        self.sideButton = tk.Button(master=frame_side, text="eleves")
+#        self.tableView = TableView(self.frame_center, controller)
+#
+#    def get_ID(self):
+#        return self.name
+#
+#    def get_Widget(self):
+#        return self.frame.children
+#
+#    def grid(self, column=0, row=0):
+#        self.frame = Frame(self.frame_center)
+#        self.tableView = TableView(self.frame_center, self.controller)
+#        print("me ! me !")
+#
+#    def forget(self):
+#        self.frame.forget()
 
 
 class TableView(tk.Frame):
@@ -190,9 +211,16 @@ class TableView(tk.Frame):
 
         self.tableContainer = []
 
+        self.grid()
+
+    def get_Widget(self):
+        print("fuck off !!")
+
+    def Re_grid(self, column=None, row=None):
         height = 5
         width = 5
         textvariable = Variable()  # change me !
+
         for i in range(height):  # Rows
             for j in range(width):  # Columns
                 b = tk.Entry(self, textvariable=textvariable)
