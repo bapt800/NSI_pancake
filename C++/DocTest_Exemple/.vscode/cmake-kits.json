@@ -1,0 +1,15 @@
+[
+    {
+      "name": "HDD Portable MinGW",
+      "compilers": {
+        "C": "D:/softwares/MinGW/bin/gcc.exe",
+        "CXX": "D:/softwares/MinGW/bin/g++.exe"
+      },
+      "preferredGenerator": {
+        "name": "MinGW Makefiles"
+      },
+      "environmentVariables": {
+        "CMT_MINGW_PATH": "D:/softwares/MinGW/bin"
+      }
+    }
+  ]
