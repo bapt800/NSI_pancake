@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import Frame, Variable, Widget, font as tkfont
-from typing import List
+from typing import Dict, List
 from functools import partial
 
 
@@ -18,8 +18,8 @@ class SGBDD_GUI(tk.Tk):
         self.sideMenu: SideMenu = SideMenu(self, self)
         self.sideMenu.grid(column=0, row=0)
         self.sideMenu.anchor("n")
-        self.sideMenu.set_containerButton([tk.Button(self.sideMenu, text="Go to Page One", command=lambda: self.sideMenu.controller.show_frame("PageOne")),
-                                           tk.Button(self.sideMenu, text="add view", command=lambda: self.sideMenu.controller.addView())])
+        self.sideMenu.addTo_containerButton(tk.Button(self.sideMenu, text="Go to Page One", command=lambda: self.sideMenu.controller.show_frame("PageOne")))
+        self.sideMenu.addTo_containerButton(tk.Button(self.sideMenu, text="add view", command=lambda: self.sideMenu.controller.addView()))
         #command=partial(self.addView, "test", self.show_frame("start"))
 
         # the container is where we'll stack a bunch of frames
@@ -30,50 +30,61 @@ class SGBDD_GUI(tk.Tk):
         self.container.grid_rowconfigure(0, weight=1)
         self.container.grid_columnconfigure(0, weight=1)
 
-        self.liveFrames = {"start": StartPage(
-            self.container, self), "PageOne": PageOne(self.container, self)}
-        self.hide_frame_all()
-        self.show_frame("start")
+        
+        self.view_container:Dict = {"main": View(
+            controller=self, frame_side=self.sideMenu, frame_center=self.container, view_ID="main")}
+        self.promoted_view = View(controller=self, frame_side=self.sideMenu, frame_center=self.container, view_ID="main")
+
+
+        self.promote_view("main")
+
+    def show_frame(self, frame_ID):
+        self.promoted_view.grid()
+
+    def destroy_view(self, view_ID):
+        self.view_container[view_ID] = None
 
     def hide_frame_all(self):
-        for frame in self.liveFrames.values():
-            frame.grid_forget()
+        self.promoted_view.destroy()
 
-    def show_frame(self, frame_id):
+    def promote_view(self, view_ID):
         self.hide_frame_all()
-        self.liveFrames[frame_id].grid(column=1, row=1)
+        self.promoted_view = self.view_container[view_ID]
+        
+        
 
-    def addView(self, name=""):
-        if name == "":
+    def addView(self, view_ID=""):
+        if view_ID == "":
             #name = input("type a name")
-            name = "prof TEST"
+            view_ID = "prof TEST"
 
-        view: View = View(frame_parent=self.container,
-                          controller=self, name=name)
-        self.liveFrames[view.get_name()] = view.tableView
-        self.sideMenu.set_containerButton([tk.Button(
-            self.sideMenu, text=view.get_name(), command=lambda: self.sideMenu.controller.show_frame(view.get_name()))])
+        view: View = View(controller=self, frame_side=self.sideMenu,
+                          frame_center=self.container, view_ID=view_ID)
+        self.view_container[view.get_ID()] = view.tableView
+
+        self.sideMenu.addTo_containerButton(tk.Button(self.sideMenu, text=view.get_ID(
+        ), command=lambda: self.sideMenu.controller.promote_view(view.get_ID())))
 
     def exit(self):
         print("ciao")
 
 
-class MenuBar(tk.Menu):
-    def __init__(self, parent: SGBDD_GUI):
-        tk.Menu.__init__(self, parent)
-        menu_file = tk.Menu(self, tearoff=0)
-
-        self.add_cascade(label="File", menu=menu_file)
-        menu_file.add_command(
-            label="Start page", command=lambda: parent.show_frame(frame_id="StartPage"))
-        menu_file.add_separator()
-        menu_file.add_command(label="Exit Application",
-                              command=lambda: parent.exit())
-
-        menu_help = tk.Menu(self, tearoff=0)
-        self.add_cascade(label="Help", menu=menu_help)
-        menu_help.add_command(label="Restart connection",
-                              command=lambda: parent.exit())
+# class MenuBar(tk.Menu):
+#    def __init__(self, parent: SGBDD_GUI):
+#        tk.Menu.__init__(self, parent)
+#        menu_file = tk.Menu(self, tearoff=0)
+#
+#        self.add_cascade(label="File", menu=menu_file)
+#        menu_file.add_command(
+#            label="Start page", command=lambda: parent.show_frame("StartPage"))
+#        menu_file.add_separator()
+#        menu_file.add_command(label="Exit Application",
+#                              command=lambda: parent.exit())
+#
+#        menu_help = tk.Menu(self, tearoff=0)
+#        self.add_cascade(label="Help", menu=menu_help)
+#        menu_help.add_command(label="Restart connection",
+#                              command=lambda: parent.exit())
 
 
 class SideMenu(tk.Frame):
@@ -84,28 +95,36 @@ class SideMenu(tk.Frame):
         self.frameButton = tk.Frame(self)
         self.frameButton.grid(column=0, row=0)
         self.frameButton.anchor("n")
-        
+
         self.containerButton: List[tk.Button] = []
 
         self.refreshAll()
 
     def refreshAll(self):
-        for ell in self.frameButton.children.values():
-            ell.forget()
-
+        #buff = self.frameButton
+        #for ell in self.frameButton.children.values():
+        #    ell.destroy()
+        self.frameButton.forget()
+        
         row = 0
         for ell in self.containerButton:
-            print(ell)
+            print("refreshAll", ell)
             ell.grid(column=0, row=row)
             row += 1
+        print("refreshAll", "end")
 
     def get_containerButton(self) -> List[tk.Button]:
         return self.containerButton
 
-    def set_containerButton(self, containerButton: List[tk.Button]) -> None:
-        self.containerButton = containerButton
+    def addTo_containerButton(self, Button:tk.Button) -> None:
+        if len(self.containerButton) == 0:
+            self.containerButton.append(Button)
+        else:
+            AddNewFiche = self.containerButton[-1]
+            self.containerButton[-1] = Button
+            print("test", AddNewFiche == self.containerButton[-1])
+            self.containerButton.append(AddNewFiche)
         self.refreshAll()
-        print("xoork")
 
     def set_activeButton(self, index):
         raise NotImplementedError()
@@ -146,12 +165,21 @@ class PageOne(tk.Frame):
 
 
 class View:
-    def __init__(self, frame_parent, controller, name) -> None:
-        self.name = name
-        self.tableView = TableView(frame_parent, controller)
+    def __init__(self, controller, frame_side, frame_center, view_ID) -> None:
+        self.name = view_ID
+        self.frame = Frame(frame_center)
+        self.sideButton = tk.Button(master=frame_side, text="eleves")
+        self.tableView = TableView(self.frame, controller)
 
-    def get_name(self):
+    def get_ID(self):
         return self.name
+    
+    def grid(self, column = 0, row = 0):
+        self.frame.grid(column=column, row=row)
+    
+    def destroy(self):
+        self.frame.destroy()
+    
 
 
 class TableView(tk.Frame):
