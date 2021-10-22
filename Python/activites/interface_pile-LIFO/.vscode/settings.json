@@ -1,5 +1,5 @@
 {
-    "python.pythonPath": "E:\\softwares\\Python\\python-3.10.0b4.amd64\\python.exe",
+    "python.pythonPath": "D:\\softwares\\Python\\python-3.10.0b4.amd64\\python.exe",
     "python.testing.pytestArgs": [
         "."
     ],

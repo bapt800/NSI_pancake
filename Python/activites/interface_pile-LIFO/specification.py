@@ -19,15 +19,15 @@ class Pile:
         pass
 
     def get(self):
+        # return the last obj
+        pass
+
+    def pop(self) -> None:
+        # delete the last obj
+        pass
+
+    def get_pop(self):
         # return the last obj of this list and delete it
         pass
 
-
-maPile = Pile()
-print(maPile.is_void())  # -> True
-
-maPile.append(5)
-print(maPile.is_void())  # -> False
-
-print(maPile.get())  # -> 5
-print(maPile.is_void())  # -> True
+print("hello")
