@@ -4,9 +4,9 @@ hetD::hetD(void)
 {
 }
 
-hetD::~hetD()
+hetD::~hetD(void)
 {
-    delete data;
+    delete stack;
 }
 
 template <typename T>
@@ -18,37 +18,37 @@ void hetD::append(T d)
 template <>
 void hetD::append<int>(int d)
 {
-    hetD_internalStruct buff;
+    hetD_internalStruct_int buff(d);
 
-    buff.d_int = d;
-
-    data->push_back(buff);
+    stack->push_back(buff);
 }
 
 template <>
 void hetD::append<std::string>(std::string d)
 {
-    hetD_internalStruct buff;
+    hetD_internalStruct_string buff(d);
 
-    buff.d_str = d;
-
-    data->push_back(buff);
+    stack->push_back(buff);
 }
 
 template <>
-void hetD::append<const char*>(const char* d)
+void hetD::append<const char *>(const char *d)
 {
-    hetD_internalStruct buff;
+    hetD_internalStruct_string buff(d);
 
-    buff.d_str = std::string(d);
-
-    data->push_back(buff);
+    stack->push_back(buff);
 }
 
-hetD_internalStruct hetD::pop()
+template<typename T>
+T hetD::pop()
 {
-    hetD_internalStruct data_internal = data->back();
+    hetD_internalStruct_string data_internal = stack->back();
 
-    data->pop_back();
+    stack->pop_back();
     return data_internal;
+}
+
+void hetD::FUTUR(void)
+{
+    std::cout << stack->back().data << std::endl;
 }
