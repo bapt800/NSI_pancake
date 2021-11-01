@@ -1,0 +1,26 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+E:/Github/NSI_pancake/C++/Componets/hetD/hetD.cpp
+hetD.hpp
+E:/Github/NSI_pancake/C++/Componets/hetD/hetD.hpp
+
+E:/Github/NSI_pancake/C++/Componets/hetD/hetD.hpp
+string
+-
+vector
+-
+iostream
+-
+
+E:/Github/NSI_pancake/C++/Componets/hetD/main.cpp
+iostream
+-
+hetD.hpp
+E:/Github/NSI_pancake/C++/Componets/hetD/hetD.hpp
+

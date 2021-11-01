@@ -1,0 +1,45 @@
+Start testing: Oct 09 18:30 Paris, Madrid (heure d?été)
+----------------------------------------------------------
+2/2 Testing: test2
+2/2 Test: test2
+Command: "E:/Github/NSI_pancake/C++/DocTest_Exemple/build/test2.exe"
+Directory: E:/Github/NSI_pancake/C++/DocTest_Exemple/build
+"test2" start time: Oct 09 18:30 Paris, Madrid (heure d?été)
+Output:
+----------------------------------------------------------
+[doctest] doctest version is "1.2.9"
+[doctest] run with "--help" for options
+===============================================================================
+[doctest] test cases:      3 |      3 passed |      0 failed |      0 skipped
+[doctest] assertions:      3 |      3 passed |      0 failed |
+[doctest] Status: SUCCESS!
+<end of output>
+Test time =   0.06 sec
+----------------------------------------------------------
+Test Passed.
+"test2" end time: Oct 09 18:30 Paris, Madrid (heure d?été)
+"test2" time elapsed: 00:00:00
+----------------------------------------------------------
+
+1/2 Testing: test1
+1/2 Test: test1
+Command: "E:/Github/NSI_pancake/C++/DocTest_Exemple/build/test1.exe"
+Directory: E:/Github/NSI_pancake/C++/DocTest_Exemple/build
+"test1" start time: Oct 09 18:30 Paris, Madrid (heure d?été)
+Output:
+----------------------------------------------------------
+[doctest] doctest version is "1.2.9"
+[doctest] run with "--help" for options
+===============================================================================
+[doctest] test cases:      2 |      2 passed |      0 failed |      0 skipped
+[doctest] assertions:      2 |      2 passed |      0 failed |
+[doctest] Status: SUCCESS!
+<end of output>
+Test time =   3.04 sec
+----------------------------------------------------------
+Test Passed.
+"test1" end time: Oct 09 18:30 Paris, Madrid (heure d?été)
+"test1" time elapsed: 00:00:03
+----------------------------------------------------------
+
+End testing: Oct 09 18:30 Paris, Madrid (heure d?été)

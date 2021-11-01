@@ -1,0 +1,2 @@
+E:\softwares\MinGW\bin\ar.exe qc libWinmm.a 
+E:\softwares\MinGW\bin\ranlib.exe libWinmm.a

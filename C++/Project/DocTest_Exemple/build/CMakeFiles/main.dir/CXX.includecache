@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+E:/Github/NSI_pancake/C++/DocTest_Exemple/fx2000.cpp
+
+E:/Github/NSI_pancake/C++/DocTest_Exemple/fx2000.hpp
+fx2000.cpp
+E:/Github/NSI_pancake/C++/DocTest_Exemple/fx2000.cpp
+
+E:/Github/NSI_pancake/C++/DocTest_Exemple/main.cpp
+iostream
+-
+fx2000.hpp
+E:/Github/NSI_pancake/C++/DocTest_Exemple/fx2000.hpp
+

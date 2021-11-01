@@ -1,0 +1,45 @@
+Start testing: Oct 25 22:15 Paris, Madrid (heure d?été)
+----------------------------------------------------------
+2/2 Testing: test2
+2/2 Test: test2
+Command: "E:/Github/NSI_pancake/C++/Componets/hetD/build/test2.exe"
+Directory: E:/Github/NSI_pancake/C++/Componets/hetD/build
+"test2" start time: Oct 25 22:15 Paris, Madrid (heure d?été)
+Output:
+----------------------------------------------------------
+[doctest] doctest version is "1.2.9"
+[doctest] run with "--help" for options
+===============================================================================
+[doctest] test cases:      1 |      1 passed |      0 failed |      0 skipped
+[doctest] assertions:      1 |      1 passed |      0 failed |
+[doctest] Status: SUCCESS!
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"test2" end time: Oct 25 22:15 Paris, Madrid (heure d?été)
+"test2" time elapsed: 00:00:00
+----------------------------------------------------------
+
+1/2 Testing: test1
+1/2 Test: test1
+Command: "E:/Github/NSI_pancake/C++/Componets/hetD/build/test1.exe"
+Directory: E:/Github/NSI_pancake/C++/Componets/hetD/build
+"test1" start time: Oct 25 22:15 Paris, Madrid (heure d?été)
+Output:
+----------------------------------------------------------
+[doctest] doctest version is "1.2.9"
+[doctest] run with "--help" for options
+===============================================================================
+[doctest] test cases:      2 |      2 passed |      0 failed |      0 skipped
+[doctest] assertions:      3 |      3 passed |      0 failed |
+[doctest] Status: SUCCESS!
+<end of output>
+Test time =   5.08 sec
+----------------------------------------------------------
+Test Passed.
+"test1" end time: Oct 25 22:15 Paris, Madrid (heure d?été)
+"test1" time elapsed: 00:00:05
+----------------------------------------------------------
+
+End testing: Oct 25 22:15 Paris, Madrid (heure d?été)
