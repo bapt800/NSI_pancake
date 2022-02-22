@@ -1,3 +1,0 @@
-E:/Github/NSI_pancake/C++/PlaySound/build/CMakeFiles/edit_cache.dir
-E:/Github/NSI_pancake/C++/PlaySound/build/CMakeFiles/main.dir
-E:/Github/NSI_pancake/C++/PlaySound/build/CMakeFiles/rebuild_cache.dir

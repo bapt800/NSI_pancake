@@ -1,7 +1,0 @@
-E:/Github/NSI_pancake/C++/Componets/hetD/build/CMakeFiles/doctest_implement.dir
-E:/Github/NSI_pancake/C++/Componets/hetD/build/CMakeFiles/test1.dir
-E:/Github/NSI_pancake/C++/Componets/hetD/build/CMakeFiles/rebuild_cache.dir
-E:/Github/NSI_pancake/C++/Componets/hetD/build/CMakeFiles/test.dir
-E:/Github/NSI_pancake/C++/Componets/hetD/build/CMakeFiles/test2.dir
-E:/Github/NSI_pancake/C++/Componets/hetD/build/CMakeFiles/edit_cache.dir
-E:/Github/NSI_pancake/C++/Componets/hetD/build/CMakeFiles/main.dir
